@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Job = ({ data }) => {
   const dispatch = useDispatch();
-  const favouriteCo = useSelector((state) => state.fav.content);
 
   return (
     <Row
