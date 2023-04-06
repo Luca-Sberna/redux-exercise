@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Job = ({ data }) => {
   const dispatch = useDispatch();
+  const isFavourite = useSelector((state) => state.fav.content);
+  const isInFavourites = isFavourite.includes(data.company_name);
 
   return (
     <Row
@@ -11,8 +13,20 @@ const Job = ({ data }) => {
       style={{ border: "1px solid #00000033", borderRadius: 4 }}
     >
       <Col className="p-0">
-        <Button onClick={() => dispatch({ type: "ADD_TO_FAV", payload: data })}>
-          ❤️
+        <Button
+          onClick={() => {
+            isInFavourites
+              ? dispatch({
+                  type: "REMOVE_FROM_FAV",
+                  payload: data.company_name,
+                })
+              : dispatch({
+                  type: "ADD_TO_FAV",
+                  payload: data.company_name,
+                });
+          }}
+        >
+          {!isInFavourites ? "❤️" : "😍"}
         </Button>
       </Col>
       <Col className="pl-0">

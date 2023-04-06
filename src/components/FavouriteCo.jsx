@@ -2,7 +2,7 @@ import { Row, Col, Button, Container, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-const FavouriteCo = ({ data }) => {
+const FavouriteCo = () => {
   const dispatch = useDispatch();
   const favouriteCo = useSelector((state) => state.fav.content);
 
@@ -13,24 +13,26 @@ const FavouriteCo = ({ data }) => {
           <h2>Le tue aziende preferite</h2>
           <ListGroup variant="flush">
             {favouriteCo.length > 0 ? (
-              favouriteCo.map((data, i) => (
+              favouriteCo.map((data) => (
                 <Row
-                  key={i}
                   className="mx-0 mt-3 p-3 align-items-center"
                   style={{ border: "1px solid #00000033", borderRadius: 4 }}
                 >
                   <Col sm={1} className="p-0">
                     <Button
                       onClick={() =>
-                        dispatch({ type: "REMOVE_FROM_FAV", payload: i })
+                        dispatch({
+                          type: "REMOVE_FROM_FAV",
+                          payload: data,
+                        })
                       }
                     >
                       ❌
                     </Button>
                   </Col>
                   <Col>
-                    <Link className="text-dark" to={`/${data.company_name}`}>
-                      {data.company_name}
+                    <Link className="text-dark" to={`/${data}`}>
+                      {data}
                     </Link>
                   </Col>
                 </Row>
